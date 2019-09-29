@@ -1,5 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import './Screens/CurrentOrders.dart';
+import './Brains/Orders.dart';
+import './Brains/Login.dart';
+import 'Screens/First.dart';
 
 void main() => runApp(MyApp());
 
@@ -7,12 +13,23 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(builder: (_) => Orders()),
+        ChangeNotifierProvider(builder: (_) => Login()),
+      ],
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: MyHomePage(title: 'Flutter Demo Home Page'),
+        routes: {
+          // When navigating to the "/" route, build the FirstScreen widget.
+          '/login-screen': (context) => First(),
+          '/cooking-orders': (context) => CurrentOrders(),
+        },
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
@@ -29,6 +46,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return CurrentOrders();
+    return First();
   }
 }
