@@ -64,6 +64,7 @@ class _FirstState extends State<First> {
     var orders = Provider.of<Orders>(context);
     socket.on('updateOrders', (data) {
       orders.getCookingOrder();
+      orders.getCompleteOrder();
       print('UpdateOrders called+++++++++');
     });
   }
@@ -128,6 +129,7 @@ class _FirstState extends State<First> {
                       if (status) {
                         setUserId(msg);
                         ordersInfo.getCookingOrder();
+                        ordersInfo.getCompleteOrder();
                         Navigator.pushReplacementNamed(
                             context, '/cooking-orders');
                       } else {

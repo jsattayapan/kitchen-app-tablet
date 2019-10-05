@@ -8,12 +8,12 @@ import 'package:kitchen_orders_status/Widgets/OrderBox.dart';
 import 'package:provider/provider.dart';
 import './../Brains/Orders.dart';
 
-class CurrentOrders extends StatefulWidget {
+class CompleteOrders extends StatefulWidget {
   @override
-  _CurrentOrdersState createState() => _CurrentOrdersState();
+  _CompleteOrdersState createState() => _CompleteOrdersState();
 }
 
-class _CurrentOrdersState extends State<CurrentOrders> {
+class _CompleteOrdersState extends State<CompleteOrders> {
   List<Widget> getCurrentOrders(items) {
     List<Widget> list = new List();
     for (var item in items) {
@@ -63,7 +63,7 @@ class _CurrentOrdersState extends State<CurrentOrders> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               AppHeader(
-                label: 'รายการกำลังปรุง',
+                label: 'รายการปรุงเสร็จแล้ว',
               ),
               Row(
                 children: <Widget>[
@@ -98,9 +98,9 @@ class _CurrentOrdersState extends State<CurrentOrders> {
               Expanded(
                 child: Container(
                   color: Colors.grey.shade400,
-                  child: orders.cookingOrders.length != 0
+                  child: orders.completeOrders.length != 0
                       ? ListView(
-                          children: getCurrentOrders(orders.cookingOrders),
+                          children: getCurrentOrders(orders.completeOrders),
                         )
                       : Center(
                           child: Text('ไม่มีรายการ'),

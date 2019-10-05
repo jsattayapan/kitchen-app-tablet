@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import './Screens/CurrentOrders.dart';
+import './Screens/CompleteOrders.dart';
 import './Brains/Orders.dart';
 import './Brains/Login.dart';
 import 'Screens/First.dart';
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
           // When navigating to the "/" route, build the FirstScreen widget.
           '/login-screen': (context) => First(),
           '/cooking-orders': (context) => CurrentOrders(),
+          '/complete-orders': (context) => CompleteOrders(),
         },
       ),
     );
