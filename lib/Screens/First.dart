@@ -3,12 +3,11 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:kitchen_orders_status/Brains/Login.dart';
 import 'package:kitchen_orders_status/Brains/Orders.dart';
+import '../constant.dart' as constants;
 import 'package:provider/provider.dart';
 
 import 'package:adhara_socket_io/adhara_socket_io.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-
-const serverIpAddress = 'http://192.168.1.55:2222/';
 
 class First extends StatefulWidget {
   @override
@@ -51,14 +50,15 @@ class _FirstState extends State<First> {
   }
 
   initSocket() async {
-    socket = await manager.createInstance(SocketOptions(serverIpAddress,
-        query: {
-          "auth": "--SOME AUTH STRING---",
-          "info": "new connection from adhara-socketio",
-          "timestamp": DateTime.now().toString()
-        },
-        enableLogging: false,
-        transports: [Transports.WEB_SOCKET, Transports.POLLING]));
+    socket =
+        await manager.createInstance(SocketOptions(constants.serverIpAddress,
+            query: {
+              "auth": "--SOME AUTH STRING---",
+              "info": "new connection from adhara-socketio",
+              "timestamp": DateTime.now().toString()
+            },
+            enableLogging: false,
+            transports: [Transports.WEB_SOCKET, Transports.POLLING]));
     socket.connect();
 
     var orders = Provider.of<Orders>(context);

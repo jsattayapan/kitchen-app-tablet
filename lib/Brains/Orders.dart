@@ -1,8 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/foundation.dart';
-
-const serverIpAddress = 'http://192.168.1.55:2222/';
+import '../constant.dart' as constants;
 
 class Orders with ChangeNotifier {
   var cookingOrders = [];
@@ -12,7 +11,7 @@ class Orders with ChangeNotifier {
     print('Cooking orderssss');
     try {
       var url =
-          '${serverIpAddress}api/restaurant/tables/order-status/get-cooking-order';
+          '${constants.serverIpAddress}api/restaurant/tables/order-status/get-cooking-order/ครัวกลาง';
       var response = await http.get(url);
       var body = json.decode(response.body);
       body.sort((a, b) {
@@ -33,7 +32,7 @@ class Orders with ChangeNotifier {
     print('Cooking orderssss');
     try {
       var url =
-          '${serverIpAddress}api/restaurant/tables/order-status/get-complete-order';
+          '${constants.serverIpAddress}api/restaurant/tables/order-status/get-complete-order/ครัวกลาง';
       var response = await http.get(url);
       var body = json.decode(response.body);
       body.sort((a, b) {
@@ -53,7 +52,8 @@ class Orders with ChangeNotifier {
   submitComplete(orderId, quantity, userId, token) async {
     print('SubmitComplete');
     try {
-      var url = '${serverIpAddress}api/restaurant/tables/order-status/add';
+      var url =
+          '${constants.serverIpAddress}api/restaurant/tables/order-status/add';
       var response = await http.post(url, headers: {
         'AUTHENTICATION': token
       }, body: {
@@ -76,7 +76,7 @@ class Orders with ChangeNotifier {
   submitRedo(orderId, token) async {
     try {
       var url =
-          '${serverIpAddress}api/restaurant/tables/order-status/delete-complete';
+          '${constants.serverIpAddress}api/restaurant/tables/order-status/delete-complete';
       var response = await http
           .post(url, headers: {'AUTHENTICATION': token}, body: {'id': orderId});
       var body = json.decode(response.body);
